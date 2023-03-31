@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PositionControler;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +30,8 @@ Route :: middleware('auth')->group(
         Route::get('password', [UserController::class, 'password'])->name('password');
         Route::post('password', [UserController::class, 'password_action'])->name('password.action');
         Route::get('logout', [UserController::class, 'logout'])->name('logout');
+
+        //route positions
+        Route::resource('positions', PositionControler::class);
+        
     });
