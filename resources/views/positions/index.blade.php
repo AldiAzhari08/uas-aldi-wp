@@ -19,13 +19,17 @@
     </tr>
   </thead>
   <tbody>
-  @foreach ($positions as $data)
+  @foreach ($Departements as $data)
                     <tr>
                         <td>{{ $data->id }}</td>
                         <td>{{ $data->name }}</td>
                         <td>{{ $data->keterangan }}</td>
                         <td>{{ $data->alias }}</td>
-                        <td>
+                        <td>{{
+                              (isset($data->manager->name))?
+                                $data->manager->name : 
+                                'Tidak Ada'}}</td>
+                              <td>
                             <form action="{{ route('positions.destroy',$data->id) }}" method="Post">
                                 <a class="btn btn-primary" href="{{ route('positions.edit',$data->id) }}">Edit</a>
                                 @csrf
