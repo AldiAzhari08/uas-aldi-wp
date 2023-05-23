@@ -36,4 +36,6 @@ Route :: middleware('auth')->group(
         Route::resource('positions', PositionControler::class);
         
         Route::resource('departements', DepartementController::class);
+
+        Route::get('departements/export-pdf', [DepartementController::class, 'exportpdf'])->name('exportpdf');
     });

@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Departements;
 use Illuminate\Http\Request;
-use App\Models\Positions;
 use App\Models\User;
+use PDF;
 
 class DepartementController extends Controller
 {
@@ -62,7 +61,7 @@ class DepartementController extends Controller
 
         $departement->fill($request->post())->save();
 
-        return redirect()->route('departements.index')->with('success', 'Departemnt Has Been updated successfully');
+        return redirect()->route('departements.index')->with('success', 'Departement Has Been updated successfully');
     }
 
     /**
@@ -75,5 +74,14 @@ class DepartementController extends Controller
     {
         $departement->delete();
         return redirect()->route('departements.index')->with('success', 'departements has been deleted successfully');
+    }
+
+    public function exportPDF()
+    {
+        $title = "Laporan Data Departements";
+        $departements = Departements::orderBy('id', 'asc')->get();
+        // return view('departements.pdf', compact(['departements', 'title']));
+        $pdf = PDF::loadview('departements.pdf', compact(['departements', 'title']));
+        return $pdf->stream('laporan-department-pdf');
     }
 }

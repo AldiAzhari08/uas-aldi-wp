@@ -1,14 +1,5 @@
-@extends('app')
+@extends('layout')
 @section('content')
-@if(session('success'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-  {{session('success')}}
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
-</div>
-@endif
-<div class="text-end mb-2">
-  <a class="btn btn-success" href="{{ route('companies.create') }}"> ADD DEPARTEMENT</a>
-</div>
 <table class="table">
   <thead>
     <tr>
@@ -27,24 +18,19 @@
       <!-- <td>{{ $data->id }}</td> -->
       <td>{{ $data->name }}</td>
       <td>{{ $data->location }}</td>
-      <td>{{ $data->manager_id }}</td>
-      <td>
-        <form action="{{ route('departements.destroy',$data->id) }}" method="Post">
+      <td>{{
+        (isset($data->manager->name))?
+      $data->manager->name : 
+    'Tidak Ada'}}</td>
+        <!-- <form action="{{ route('departements.destroy',$data->id) }}" method="Post">
           <a class="btn btn-primary" href="{{ route('departements.edit',$data->id) }}">Edit</a>
           @csrf
           @method('DELETE')
           <button type="submit" class="btn btn-danger">Delete</button>
         </form>
       </td>
-    </tr>
+    </tr> -->
     @endforeach
   </tbody>
 </table>
-@endsection
-@section('js')
-<script>
-  $(document).ready(function () {
-    $('#example').DataTable();
-});
-</script>
 @endsection

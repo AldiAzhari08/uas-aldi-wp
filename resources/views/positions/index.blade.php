@@ -19,7 +19,7 @@
     </tr>
   </thead>
   <tbody>
-  @foreach ($Departements as $data)
+  @foreach ($positions as $data)
                     <tr>
                         <td>{{ $data->id }}</td>
                         <td>{{ $data->name }}</td>
